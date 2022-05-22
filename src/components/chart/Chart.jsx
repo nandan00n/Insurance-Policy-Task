@@ -16,7 +16,7 @@ export default function Chart() {
   const [date, setdate] = useState([])
   const [month, setmonth] = useState()
   const [showcard, setShowCard] = useState(false)
-  const [cardData, setCardData] = useState()
+  const [cardData, setCardData] = useState([])
 
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export default function Chart() {
     const card = records.filter(data => {
       const position = data['Date_of_Purchase'].indexOf('/')
       return data['Date_of_Purchase']
+      // eslint-disable-next-line
       .slice(0, position) == e
       .payload.monthnumber
     })
@@ -88,7 +89,7 @@ export default function Chart() {
       </div>
 
       <div>
-        {showcard && <Search  chartgraph={cardData}/>}
+        {showcard && <Search search={false} data={cardData}/>}
       </div>
     </>
   );

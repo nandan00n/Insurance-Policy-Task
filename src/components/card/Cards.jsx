@@ -8,6 +8,9 @@ import Editing from '../modal/Editing';
 
 export default function BasicCard({data}) {
 
+    console.log(data, "asdfghjkl")
+    // const data=ddata;
+
     // console.log(data.Policy_id);
 
     return (

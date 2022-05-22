@@ -3,10 +3,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import BasicCard from '../card/Cards';
-import axios from 'axios';
 import Add from '../modal/Add';
-
-const url = "/database/db.json"
+import records from '../chart/db.json'
 
 const Searchbar = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -49,25 +47,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const Search = ({chartgraph}) => {
+const Search = ({data, search}) => {
 
+    console.log(data);
     // console.log(setCardData.Policy_id, "hhhereee");
 
     const [records, setRecords] = useState([]);
     const [filteredData, setFilteredData] = useState();
     const [searchInput, setSearchInput] = useState('');
+    const [filteredchart, setfilteredchart] = useState('');
 
-    const getData = async () => {
-        try {
-            await axios.get(url)
-                .then((res) => setRecords(res.data))
-        } catch (err) {
-            console.log(err)
-        }
-    }
     useEffect(() => {
-        getData();
-    }, []);
+        const Data = () => {
+            setRecords(data)
+        }
+        console.log(data, "records data")
+          Data()
+      }, [data])
+
 
     const searchItems = (searchValue) => {
         setSearchInput(searchValue)
@@ -86,14 +83,15 @@ const Search = ({chartgraph}) => {
 
     useEffect(() => {
         const chartData = () => {
-            setFilteredData(chartgraph)
-          }
+            setfilteredchart(data)
+        }
+        console.log(data, "Chart data")
           chartData()
-      }, [chartgraph])
+      }, [data])
 
     return (
         <>
-        <Searchbar sx={{ width: "15vw", display:'flex' }}>
+       {search && <Searchbar sx={{ width: "15vw", display:'flex' }}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -103,12 +101,13 @@ const Search = ({chartgraph}) => {
                             onChange={(e) => searchItems(e.target.value)}
                         />
                       <Add />
-                    </Searchbar>
+                    </Searchbar>}
                     
             <div className='cards'>
 
-                {searchInput.length > 1 ? (
-                    filteredData.map((data) => {
+                {
+                searchInput.length > 1 ? (
+                filteredData &&  filteredData.map((data) => {
                         return (
                             <BasicCard
                                 key={data.Policy_id}
