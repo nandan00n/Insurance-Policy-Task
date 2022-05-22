@@ -4,7 +4,6 @@ import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import BasicCard from '../card/Cards';
 import Add from '../modal/Add';
-import records from '../chart/db.json'
 
 const Searchbar = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -21,7 +20,6 @@ const Searchbar = styled('div')(({ theme }) => ({
         border: '1px solid black',
     },
 }));
-
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -50,12 +48,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Search = ({data, search}) => {
 
     console.log(data);
-    // console.log(setCardData.Policy_id, "hhhereee");
+    // console.log(setCardData.Policy_id, "here");
 
     const [records, setRecords] = useState([]);
     const [filteredData, setFilteredData] = useState();
     const [searchInput, setSearchInput] = useState('');
-    const [filteredchart, setfilteredchart] = useState('');
 
     useEffect(() => {
         const Data = () => {
@@ -81,17 +78,9 @@ const Search = ({data, search}) => {
         }
     }
 
-    useEffect(() => {
-        const chartData = () => {
-            setfilteredchart(data)
-        }
-        console.log(data, "Chart data")
-          chartData()
-      }, [data])
-
     return (
         <>
-       {search && <Searchbar sx={{ width: "15vw", display:'flex' }}>
+      <Searchbar sx={{ width: "15vw", display:'flex' }}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
@@ -101,7 +90,7 @@ const Search = ({data, search}) => {
                             onChange={(e) => searchItems(e.target.value)}
                         />
                       <Add />
-                    </Searchbar>}
+                    </Searchbar>
                     
             <div className='cards'>
 

@@ -8,7 +8,7 @@ const Home = () => {
   return (
       <>
    <Navbar/>
-   <Search search={true} data={records} />
+   <Search data={records} />
       </>
   )
 }

@@ -89,7 +89,7 @@ export default function Chart() {
       </div>
 
       <div>
-        {showcard && <Search search={false} data={cardData}/>}
+        {showcard && <Search data={cardData}/>}
       </div>
     </>
   );
